@@ -1,7 +1,0 @@
-player1	player1sprite	spriteLocation	The person says this in the game	englishEnd
-player2	player2sprite	sLBottomRight	The person says this in the game2	englishEnd
-player3	player3sprite	sLBottomLeft	The person says this in the game3	englishEnd
-player4	player4sprite	sLLeft	The person says this in the game4	englishEnd
-player5	player5sprite	sLCenter	The person says this in the game5	englishEnd
-player1	player1spriteFull	sLRight	The person says this in the game6	englishEnd
-conversationEnd
