@@ -1,7 +1,7 @@
-#devid=myname
-#devtitle=My Name
-#gameid=mygame
-#gametitle=My Game
+#devid=maximilliandark
+#devtitle=Maximillian Dark
+#gameid=dragonrubyvisualnovel
+#gametitle=DragonRuby Visual Novel
 #version=0.1
 #icon=metadata/icon.png
 

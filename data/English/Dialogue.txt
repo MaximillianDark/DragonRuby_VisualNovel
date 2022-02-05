@@ -1,7 +1,8 @@
-player1	player1sprite	none	spriteLocation	The person says this in the game	voice
-player2	player2sprite	player1spriteBIG	sLRight	The person says this in the game and keeps going and going and going and going and going going and going and going and going and going going and going and going and going and going going and going and going and going and going going and going and going and going and going	voice
-player3	player3sprite	player1spriteBIG	sLLeft	The person says this in the game3	voice
-player4	player4sprite	player1spriteBIG	sLLeft	The person says this in the game4	voice
-player5	player5sprite	player1spriteBIG	sLCenter	The person says this in the game5	voice
-player1	player1sprite	player1spriteBIG	sLRight	The person says this in the game6	voice
+player1	player1sprite	player1spriteFull	sLLeft	The person says this in the game	voice
+player2	player2sprite	player2spriteFull	none	The person says this in the game and keeps going and going and going and going and going going and going and going and going and going going and going and going and going and going going and going and going and going and going going and going and going and going and going	voice
+player3	player3sprite	player3spriteFull	sLLeft	The person says this in the game3	voice
+player4	player4sprite	player4spriteFull	sLLeft	The person says this in the game4	voice
+player5	player5sprite	player5spriteFull	sLCenter	The person says this in the game5	voice
+player1	player1sprite	player1spriteFull	sLRight	The person says this in the game6	voice
+character123	player1sprite	player1spriteFull	sLRight	The person says this in the game6	voice
 conversationEnd

@@ -19,10 +19,16 @@ def playerList
 	@player6 ||= {"name" => "Freddy", "xp" => 100, "atk" => 10, "defense" => 10, "type" => "sword"}
 end
 
+def characterList
+	@character123 ||= {name: "John"}
+	@character222 ||= {name: "Suzy"}
+	@character678 ||= {name: "Mike"}
+end
+
 def screenLocation
-	@sLLeft ||= {"name" => "Left", "x" => 100, "y" => 10}
-	@sLRight ||= {"name" => "Left", "x" => 100, "y" => 10}
-	@sLCenter ||= {"name" => "Left", "x" => 100, "y" => 10}
+	@sLLeft ||= {"name" => "sLLeft", "x" => 10, "y" => 10}
+	@sLRight ||= {"name" => "sLRight", "x" => 500, "y" => 10}
+	@sLCenter ||= {"name" => "sLCenter", "x" => 200, "y" => 10}
 end
 
 def gameConfig
@@ -49,7 +55,9 @@ def initialize args
 	@args.outputs.background_color = [0, 0, 0, 255]
 	@gameover = false
 	@ending = false
-	playerList 
+	playerList
+	characterList
+	screenLocation
 	gameSettings
 	gameConfig
 	
@@ -74,17 +82,35 @@ end
 def	renderTalk
 
 	#if "#{args.state.worksheet[0][1]}" != "jump"
-		#name
-		@args.outputs.labels  << [25, 234, "#{@player1["name"]}" , 2, 255, 255, 255, 255]
-		#args.outputs.labels  << [25, 228, "#{playerList.(args.state.worksheet[0][0]).name}" , 2, 255, 255, 255, 255]
-		###image, if included
-		if @worksheet[@talkingpoint][2] != "none"
-			@args.outputs.sprites << [10, 10, 180, 500, @"#{@worksheet[@talkingpoint][3]}"["x"], @"#{@worksheet[@talkingpoint][3]}"["y"]
-			,"sprites/character/#{@worksheet[@talkingpoint][2]}.png"]
+		#NOTE: UI currently renders after Background Character Portraits, cutting off bottom.
+		#      Move renderTalkUI to duplicate comment to have bottom render over Dialogue Box
+		#Render Background Character Portrait
+		if "#{@worksheet[@talkingpoint][2]}" != "none" #none means no Background Character Portrait
+			if "#{@worksheet[@talkingpoint][3]}" == "#{@sLLeft["name"]}"
+				@args.outputs.sprites << [@sLLeft["x"], @sLLeft["y"], 620, 720, "sprites/character/#{@worksheet[@talkingpoint][2]}.png"]
+			end
+			if "#{@worksheet[@talkingpoint][3]}" == "#{@sLRight["name"]}"
+				@args.outputs.sprites << [@sLRight["x"], @sLRight["y"], 620, 720, "sprites/character/#{@worksheet[@talkingpoint][2]}.png"]
+			end
+			if "#{@worksheet[@talkingpoint][3]}" == "#{@sLCenter["name"]}"
+				@args.outputs.sprites << [@sLCenter["x"], @sLCenter["y"], 620, 720, "sprites/character/#{@worksheet[@talkingpoint][2]}.png"]
+			end
 		end
-	
+
+		#NOTE: UI currently renders after Background Character Portraits, cutting off bottom.
+		#      Move renderTalkUI to duplicate comment to have bottom render over Dialogue Box
+		#Render Dialogue Box
+		renderTalkUI
+		
+		#Render Character Name
+		#@args.outputs.labels  << [25, 234, "#{@player1["name"]}" , 2, 255, 255, 255, 255]
+		#if "#{@worksheet[@talkingpoint][0]}" == "player\*"
+			@args.outputs.labels  << [25, 234, "#{@player1["name"]}" , 2, 255, 255, 255, 255]
+		#end
+		
+		#portrait image
 		@args.outputs.sprites << [10, 10, 180, 180, "sprites/character/#{@worksheet[@talkingpoint][1]}.png"]
-		###content
+		#Dialogue - auto splits long lines.
 		long_strings_split = @args.string.wrapped_lines "#{@worksheet[@talkingpoint][4]}", @max_character_length
 		@args.outputs.labels << long_strings_split.map_with_index do |s, i|
 		{ x: 225, y: 175 - (i * 30), text: s, size_enum: 2, r: 255, g: 255, b: 255 }
@@ -105,10 +131,9 @@ end
 
 #renders UI components
 #FILLER: UI can be IMPROVED, box animations, text speed
-def	renderUI
+def	renderTalkUI
 	@args.outputs.sprites  << [0, 0, 1280, 210, "sprites/ui/dialogueBox.png"]
 	@args.outputs.sprites  << [10, 200, 250, 50, "sprites/ui/nameBox.png"]
-	renderTalk
 end 
 
 #Input Management
@@ -150,7 +175,7 @@ def inputCheck
 
 def render 
 	renderField
-	renderUI
+	renderTalk
 end
 
 def tick
